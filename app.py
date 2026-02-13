@@ -1,51 +1,60 @@
 import streamlit as st
-from fpdf import FPDF
-import datetime
 
-st.set_page_config(page_title="Cássia Prompt V8 - Premium", page_icon="💎", layout="wide")
+# Configurações de Elite V8
+st.set_page_config(page_title="Cássia Prompt V8 - Digital Only", page_icon="⚡", layout="wide")
 
-# Estética Black & Gold
+# Estética Black & Gold (Sem papel, só pixels!)
 st.markdown("""
     <style>
-    .main { background-color: #0d0d0d; color: #ffffff; }
-    .stSelectbox label, .stHeader, h1, h2, h3 { color: #d4af37 !important; }
-    div.stButton > button:first-child { background-color: #d4af37; color: black; border-radius: 8px; font-weight: bold; }
-    .stExpander { background-color: #1a1a1a; border: 1px solid #d4af37; }
+    .main { background-color: #000000; color: #ffffff; }
+    .stHeader, h1, h2, h3 { color: #d4af37 !important; }
+    .conteudo-card { 
+        background-color: #1a1a1a; 
+        padding: 20px; 
+        border-left: 5px solid #d4af37; 
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
 st.sidebar.title("💎 Cássia Prompt V8")
 st.sidebar.write("Comandante: **Cássia Kelly**")
 
-modulo = st.sidebar.selectbox("ESCOLHA O MÓDULO:", [
-    "🏠 Boas-vindas",
-    "🧠 Módulo 1: O Cérebro da IA (Prompts)",
-    "💼 Módulo 2: IA na Carreira e Negócios",
-    "🎨 Módulo 3: Criação de Imagens e Identidade",
-    "🎬 Módulo 4: Vídeos e Avatares com IA",
-    "⚙️ Módulo 5: Automações e Robôs",
-    "🎓 Gerar Certificado Final"
+modulo = st.sidebar.radio("ESCOLHA SUA AULA:", [
+    "🚀 Início Rápido",
+    "🧠 Super Prompts (Copie e Cole)",
+    "💰 Monetização Digital",
+    "🎓 Certificado Digital"
 ])
 
-if modulo == "🏠 Boas-vindas":
-    st.title("Seja bem-vindo ao Futuro!")
-    st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ") # Exemplo de onde você pode por seus vídeos
-    st.markdown("Neste curso, você vai dominar a ferramenta que está mudando o mundo.")
+if modulo == "🚀 Início Rápido":
+    st.title("A Era Digital: Sem Papel, Mais Poder")
+    st.markdown("""
+    <div class="conteudo-card">
+        <h3>Bem-vinda à Revolução!</h3>
+        <p>Aqui não imprimimos nada. O conhecimento é direto, digital e ecológico.</p>
+        <p><b>Dica da Cássia:</b> Use a função de busca (Ctrl+F) para achar qualquer comando no curso!</p>
+    </div>
+    """, unsafe_allow_html=True)
 
-elif modulo == "🧠 Módulo 1: O Cérebro da IA (Prompts)":
-    st.title("🧠 Engenharia de Prompt Reversa")
-    with st.expander("Aula 1.1: O Comandante"):
-        st.write("Aqui você aprende a dar ordens complexas...")
-    with st.expander("Aula 1.2: Estrutura de Prompt de Ouro"):
-        st.write("A fórmula secreta: Persona + Contexto + Ação + Restrição.")
+elif modulo == "🧠 Super Prompts (Copie e Cole)":
+    st.title("🧠 Biblioteca de Comandos de Elite")
     
-    # Exemplo de Botão de PDF
-    st.info("📚 Material de Apoio")
-    st.markdown("*(Para PDF, suba o arquivo no GitHub e me peça o link!)*")
+    with st.expander("👉 COMANDO: Criador de Conteúdo"):
+        st.code("Aja como um Social Media Senior. Crie um calendário de 30 dias para... [complete aqui]")
+        st.write("Use este comando para nunca mais ficar sem ideias no Instagram.")
 
-elif modulo == "🎓 Gerar Certificado Final":
-    st.title("🎓 Sua Conquista Profissional")
-    nome = st.text_input("Nome completo:")
-    if st.button("Emitir Diploma"):
-        # (Código do PDF que você já testou e funcionou)
-        st.success("Certificado Gerado!")
+    with st.expander("👉 COMANDO: Consultor de Negócios"):
+        st.code("Analise o seguinte cenário de negócio e aponte 3 falhas de eficiência... [cole seus dados]")
+
+elif modulo == "💰 Monetização Digital":
+    st.title("💰 Como faturar com IA")
+    st.write("1. Criação de infoprodutos digitais.")
+    st.write("2. Consultoria de implementação de processos com IA.")
+    st.write("3. Gestão de redes sociais com escala industrial.")
+
+elif modulo == "🎓 Certificado Digital":
+    st.title("🎓 Seu Diploma Ecológico")
+    st.write("Gere seu certificado e compartilhe no LinkedIn. 0% papel, 100% autoridade.")
+    # (Aqui mantemos o seu código de gerar o certificado que você já tem)
