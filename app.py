@@ -1,6 +1,6 @@
 import streamlit as st
 
-# --- CONFIGURAÇÃO SUPREMA ---
+# --- CONFIGURAÇÃO DE ELITE ---
 st.set_page_config(page_title="Cássia Prompt V8 | Elite", page_icon="💎", layout="wide")
 
 # --- DESIGN BLACK & GOLD ---
@@ -16,47 +16,59 @@ st.markdown("""
 
 def play_aula(url, titulo, missao):
     st.markdown(f"<h1>{titulo}</h1>", unsafe_allow_html=True)
-    st.markdown(f'<video class="video-v8" controls autoplay muted loop><source src="{url}" type="video/mp4"></video>', unsafe_allow_html=True)
-    st.markdown(f"<div class='card-v8'><h3>🚀 Missão:</h3><p>{missao}</p></div>", unsafe_allow_html=True)
+    # Tag de vídeo HTML5 nativa com links MP4 puros de alta disponibilidade
+    st.markdown(f'''
+        <video class="video-v8" controls autoplay muted loop>
+            <source src="{url}" type="video/mp4">
+            Seu sistema não suporta a tecnologia V8.
+        </video>
+        ''', unsafe_allow_html=True)
+    st.markdown(f"<div class='card-v8'><h3>🚀 Missão da Aula:</h3><p>{missao}</p></div>", unsafe_allow_html=True)
 
 # --- MENU LATERAL ---
 st.sidebar.markdown("<h2 style='color:#d4af37;'>SYSTEM V8</h2>", unsafe_allow_html=True)
-modulo = st.sidebar.radio("MÓDULOS:", [
-    "01. Boas-vindas", "02. Engenharia V8", "03. IA Business", "04. Conteúdo 10X",
-    "05. Visual Power", "06. Avatares", "07. Automação", "08. Monetização", "🎓 Graduation"
+modulo = st.sidebar.radio("MÓDULOS DE COMANDO:", [
+    "01. Welcome God Mode", "02. Engenharia V8", "03. IA Business Strategy", 
+    "04. Conteúdo Escalar", "05. Autoridade Visual", "06. Deepfake & Avatares", 
+    "07. Automação Suprema", "08. Monetização Elite", "🎓 Graduation"
 ])
 
-# --- LINKS DAS AULAS (Substitua pelos seus links MP4 diretos) ---
-links = {
-    "01": "LINK_DA_SUA_AULA_01.mp4",
-    "02": "LINK_DA_SUA_AULA_02.mp4",
-    "03": "LINK_DA_SUA_AULA_03.mp4",
-    "04": "LINK_DA_SUA_AULA_04.mp4",
-    "05": "LINK_DA_SUA_AULA_05.mp4",
-    "06": "LINK_DA_SUA_AULA_06.mp4",
-    "07": "LINK_DA_SUA_AULA_07.mp4",
-    "08": "LINK_DA_SUA_AULA_08.mp4"
-}
+# --- DATABASE DE VÍDEOS SEGUROS (MP4 DIRETO - CDN) ---
+# Vídeos de tecnologia, circuitos e dados (Sem direitos autorais impeditivos)
+v_intro = "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-circuit-board-1644-large.mp4"
+v_ai = "https://assets.mixkit.co/videos/preview/mixkit-data-processing-in-a-server-room-41031-large.mp4"
+v_business = "https://assets.mixkit.co/videos/preview/mixkit-top-view-of-a-keyboard-and-a-mouse-on-a-desk-43314-large.mp4"
+v_content = "https://assets.mixkit.co/videos/preview/mixkit-selection-of-videos-on-a-digital-screen-40019-large.mp4"
+v_visual = "https://assets.mixkit.co/videos/preview/mixkit-abstract-animation-of-gold-and-black-3d-shapes-48352-large.mp4"
+v_automation = "https://assets.mixkit.co/videos/preview/mixkit-white-robot-arm-working-in-a-factory-40026-large.mp4"
 
-if modulo == "01. Boas-vindas":
-    play_aula(links["01"], "🛡️ BEM-VINDA AO COMANDO V8", "Início da jornada de transformação digital jurídica.")
+if modulo == "01. Welcome God Mode":
+    play_aula(v_intro, "🛡️ BEM-VINDA AO COMANDO V8", "O início da sua jornada rumo à liberdade digital e domínio total das IAs.")
+
 elif modulo == "02. Engenharia V8":
-    play_aula(links["02"], "🧠 O PROTOCOLO DE COMANDO", "Domine a engenharia de prompt avançada.")
-elif modulo == "03. IA Business":
-    play_aula(links["03"], "💼 NEGÓCIOS DE ALTA PERFORMANCE", "IA na estrutura jurídica e redução de custos.")
-elif modulo == "04. Conteúdo 10X":
-    play_aula(links["04"], "🎬 FÁBRICA DE AUTORIDADE", "Produção escalar de conteúdo estratégico.")
-elif modulo == "05. Visual Power":
-    play_aula(links["05"], "🎨 VISUAL POWER BRANDING", "Identidade visual de autoridade com IA.")
-elif modulo == "06. Avatares":
-    play_aula(links["06"], "🎥 CLONAGEM E ESCALA", "Sua presença digital multiplicada por avatares.")
-elif modulo == "07. Automação":
-    play_aula(links["07"], "⚙️ ECOSSISTEMA AUTÔNOMO", "Processos que rodam sem sua intervenção.")
-elif modulo == "08. Monetização":
-    play_aula(links["08"], "💰 MONETIZAÇÃO ELITE", "Como cobrar caro por consultoria de IA.")
+    play_aula(v_ai, "🧠 O PROTOCOLO DE COMANDO", "Como estruturar o pensamento para extrair 100% de inteligência da máquina.")
+
+elif modulo == "03. IA Business Strategy":
+    play_aula(v_business, "💼 IA BUSINESS ARCHITECTURE", "Estratégias para advogadas reduzirem custos e triplicarem a produtividade.")
+
+elif modulo == "04. Conteúdo Escalar":
+    play_aula(v_content, "🎬 FÁBRICA DE AUTORIDADE", "Onipresença digital: como produzir conteúdo para um mês em um dia.")
+
+elif modulo == "05. Autoridade Visual":
+    play_aula(v_visual, "🎨 VISUAL POWER BRANDING", "A psicologia das imagens geradas por IA no posicionamento de luxo.")
+
+elif modulo == "06. Deepfake & Avatares":
+    play_aula(v_intro, "🎥 CLONAGEM E ESCALA", "Multiplicando sua presença física através de avatares digitais inteligentes.")
+
+elif modulo == "07. Automação Suprema":
+    play_aula(v_automation, "⚙️ ECOSSISTEMA AUTÔNOMO", "Conectando o cérebro da IA aos seus sistemas de trabalho diários.")
+
+elif modulo == "08. Monetização Elite":
+    play_aula(v_ai, "💰 MONETIZAÇÃO GOD MODE", "Como empacotar seu conhecimento e vender consultoria de IA para o mercado jurídico.")
+
 elif modulo == "🎓 Graduation":
     st.balloons()
     st.markdown("<h1>🎓 CERTIFICAÇÃO V8 MASTER</h1>", unsafe_allow_html=True)
     nome = st.text_input("NOME PARA O REGISTRO:")
     if st.button("EMITIR DIPLOMA"):
-        st.success(f"DIPLOMA GERADO: {nome.upper()}")
+        st.success(f"DIPLOMA GERADO COM SUCESSO: {nome.upper()}")
