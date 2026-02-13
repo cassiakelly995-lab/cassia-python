@@ -1,0 +1,51 @@
+import streamlit as st
+
+# Configurações de Elite V8
+st.set_page_config(page_title="Cássia Prompt V8 - Central", page_icon="⚖️", layout="wide")
+
+# Estética Dark Mode para a Cássia
+st.markdown("""
+    <style>
+    .main { background-color: #000000; color: #ffffff; }
+    .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #d4af37; color: black; font-weight: bold; }
+    </style>
+    """, unsafe_allow_html=True)
+
+st.sidebar.title("💎 Antônio | Assistente V8")
+st.sidebar.info("Usuária: Cássia Kelly")
+
+# Navegação de Controle
+fase = st.sidebar.radio("Selecione a Etapa:", [
+    "📌 Visão Geral", 
+    "🎬 Produção de Conteúdo", 
+    "📈 Gestão de Lançamento",
+    "⚙️ Configurações"
+])
+
+if fase == "📌 Visão Geral":
+    st.title("Painel de Controle: Cássia Prompt V8")
+    st.subheader("Status do Projeto: God Mode / Elite Edition")
+    
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Aulas Gravadas", "12", "+2")
+    col2.metric("Edição CapCut", "85%", "Em progresso")
+    col3.metric("Versão Atual", "V8.0")
+
+    st.write("---")
+    st.markdown("### 📝 Notas Rápidas da Cássia")
+    nota = st.text_area("O que temos para hoje?", placeholder="Escreva aqui suas ideias de gravação...")
+
+elif fase == "🎬 Produção de Conteúdo":
+    st.title("Scripts e Roteiros Mobile")
+    modulo = st.selectbox("Escolha o Módulo:", ["M1: Fundamentos", "M2: Filmagem", "M3: Edição", "M4: Vendas"])
+    
+    st.info(f"Exibindo roteiros para: {modulo}")
+    # Aqui você pode adicionar campos para colar seus prompts de IA
+    st.text_area("Roteiro da Aula:", height=300)
+
+elif fase == "📈 Gestão de Lançamento":
+    st.title("Estratégia de Venda - Advogadas")
+    st.checkbox("Página de Vendas (Copy)")
+    st.checkbox("Anúncios Instagram")
+    st.checkbox("Conteúdo LinkedIn")
+    st.success("Tudo pronto para o lançamento da versão Elite!")
