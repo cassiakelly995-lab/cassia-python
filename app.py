@@ -1,96 +1,114 @@
 import streamlit as st
 
-# --- CONFIGURAÇÃO DE ELITE (BYPASS TOTAL) ---
-st.set_page_config(page_title="Cássia Prompt V8 | Elite", page_icon="💎", layout="wide")
+# --- CONFIGURAÇÃO DE ALTO IMPACTO ---
+st.set_page_config(page_title="Cássia Prompt V8 | Ultra Elite", page_icon="💎", layout="wide")
 
-# --- DESIGN ULTRA-MODERNO (BLACK & GOLD) ---
+# --- ESTÉTICA TECNOLÓGICA AVANÇADA ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
-    html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
-    .main { background-color: #000; }
-    h1, h2 { color: #d4af37 !important; text-align: center; font-weight: 700; text-transform: uppercase; }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;600&display=swap');
     
-    /* Container de Vídeo com Tecnologia de Auto-Ajuste */
-    .video-wrapper {
-        position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
-        height: 0;
-        border: 3px solid #d4af37;
-        border-radius: 15px;
+    .main { background-color: #000000; color: #ffffff; }
+    h1, h2 { font-family: 'Orbitron', sans-serif; color: #d4af37 !important; text-align: center; letter-spacing: 3px; }
+    
+    /* Moldura de Vídeo Ultra-Resiliente */
+    .video-container {
+        border: 4px solid #d4af37;
+        border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0px 0px 25px rgba(212, 175, 55, 0.5);
-    }
-    .video-wrapper iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .card-info {
+        box-shadow: 0px 0px 30px rgba(212, 175, 55, 0.5);
         background: #111;
-        padding: 20px;
+        margin: 20px auto;
+        max-width: 900px;
+    }
+    
+    .card-v8 {
+        background: rgba(212, 175, 55, 0.07);
+        padding: 25px;
+        border-radius: 15px;
+        border-left: 8px solid #d4af37;
+        margin-top: 20px;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Botão de Comando */
+    div.stButton > button {
+        background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+        color: #000 !important;
+        font-weight: bold;
         border-radius: 10px;
-        border-left: 5px solid #d4af37;
-        margin-top: 15px;
+        padding: 15px;
+        border: none;
+        width: 100%;
+        font-family: 'Orbitron', sans-serif;
     }
     </style>
     """, unsafe_allow_html=True)
 
-# --- FUNÇÃO DE RENDERIZAÇÃO DE ELITE ---
-def play_v8(url_video, titulo, texto):
+# --- SISTEMA DE VÍDEO NATIVO (BYPASS TOTAL) ---
+def render_aula(url, titulo, missao):
     st.markdown(f"<h1>{titulo}</h1>", unsafe_allow_html=True)
-    # Usando Iframe direto para garantir compatibilidade total
+    # Usando tag de vídeo nativa HTML5 para evitar bloqueios de terceiros
     st.markdown(f"""
-        <div class="video-wrapper">
-            <iframe src="{url_video}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-container">
+            <video width="100%" height="auto" controls autoplay muted loop>
+                <source src="{url}" type="video/mp4">
+                Seu navegador não suporta vídeos de alta tecnologia.
+            </video>
         </div>
         """, unsafe_allow_html=True)
-    st.markdown(f"<div class='card-info'><h3>📖 Conteúdo Estratégico</h3><p>{texto}</p></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='card-v8'><h3>🚀 Missão da Aula:</h3><p>{missao}</p></div>", unsafe_allow_html=True)
 
-# --- MENU LATERAL DE COMANDO ---
-st.sidebar.title("💎 CÁSSIA V8")
-modulo = st.sidebar.radio("ACESSAR MÓDULO:", [
-    "01. Welcome Experience",
-    "02. Engenharia de Prompt V8",
+# --- PAINEL DE COMANDO ---
+st.sidebar.markdown("<h1 style='font-size: 1.5rem;'>SYSTEM V8</h1>", unsafe_allow_html=True)
+st.sidebar.markdown("---")
+modulo = st.sidebar.radio("NAVEGAÇÃO:", [
+    "01. Welcome: A Nova Era",
+    "02. Engenharia V8 God Mode",
     "03. IA Business Architecture",
     "04. Conteúdo Escalar 10X",
     "05. Autoridade Visual IA",
     "06. Deepfake & Avatares",
     "07. Automação de Processos",
     "08. Monetização & Scale",
-    "🎓 Graduation"
+    "🎓 Certificação"
 ])
 
-# --- MAPEAMENTO DE VÍDEOS (LINKS DE ALTA DISPONIBILIDADE) ---
-if modulo == "01. Welcome Experience":
-    play_v8("https://player.vimeo.com/video/253982136", "🛡️ BEM-VINDA À ELITE TECH", "Este é o início da sua transformação. Aqui, você assume o controle das máquinas.")
+# --- CONTEÚDO DE ALTA DENSIDADE ---
+# Links de vídeo direto (Direct MP4) para garantir funcionamento
+v1 = "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-circuit-board-1644-large.mp4"
+v2 = "https://assets.mixkit.co/videos/preview/mixkit-data-processing-in-a-server-room-41031-large.mp4"
 
-elif modulo == "02. Engenharia de Prompt V8":
-    play_v8("https://player.vimeo.com/video/110594344", "🧠 PROTOCOLO V8 GOD MODE", "Aprenda a estruturar comandos que nenhuma faculdade ensina. Persona + Contexto + Missão.")
+if modulo == "01. Welcome: A Nova Era":
+    render_aula(v1, "🛡️ BEM-VINDA AO COMANDO V8", "O mundo das advogadas mudou. Aqui, você deixa de ser executora e passa a ser a arquiteta de sistemas inteligentes.")
+
+elif modulo == "02. Engenharia V8 God Mode":
+    render_aula(v2, "🧠 O PROTOCOLO DE COMANDO", "Domine a arte de dar ordens às máquinas. Não peça, comande com precisão cirúrgica.")
+    with st.expander("🛠️ WORKSHOP DE PROMPT"):
+        st.text_area("Digite seu comando God Mode:")
+        st.button("EXECUTAR COMANDO NO SISTEMA")
 
 elif modulo == "03. IA Business Architecture":
-    play_v8("https://player.vimeo.com/video/110594344", "💼 ESTRATÉGIA DE NEGÓCIOS", "Implemente processos que rodam sozinhos e economizam 40 horas por mês.")
+    render_aula(v1, "💼 NEGÓCIOS DE ALTA PERFORMANCE", "Implementando IA na estrutura jurídica para análise de contratos e redução de custos operacionais.")
 
 elif modulo == "04. Conteúdo Escalar 10X":
-    play_v8("https://player.vimeo.com/video/253982136", "🎬 FÁBRICA DE AUTORIDADE", "Como criar autoridade digital infinita usando inteligência gerativa.")
+    render_aula(v2, "🎬 FÁBRICA DE AUTORIDADE", "Como criar um ecossistema de conteúdo que vende sua imagem 24 horas por dia.")
 
 elif modulo == "05. Autoridade Visual IA":
-    play_v8("https://player.vimeo.com/video/110594344", "🎨 IDENTIDADE VISUAL", "Domine as ferramentas de criação de imagens que transmitem poder e confiança.")
+    render_aula(v1, "🎨 VISUAL POWER BRANDING", "Crie uma identidade visual que exala poder e tecnologia, superando qualquer estúdio tradicional.")
 
 elif modulo == "06. Deepfake & Avatares":
-    play_v8("https://player.vimeo.com/video/253982136", "🎥 CLONAGEM DIGITAL", "Sua presença física escala sem que você precise estar na frente da câmera.")
+    render_aula(v2, "🎥 CLONAGEM E ESCALA", "Sua presença digital em qualquer lugar do mundo, sem a necessidade da sua presença física.")
 
 elif modulo == "07. Automação de Processos":
-    play_v8("https://player.vimeo.com/video/110594344", "⚙️ ECOSSISTEMA AUTÔNOMO", "Conecte todas as ferramentas e deixe os robôs trabalharem enquanto você dorme.")
+    render_aula(v1, "⚙️ ECOSSISTEMA AUTÔNOMO", "Onde as IAs conversam entre si e resolvem o seu backoffice sozinhas.")
 
 elif modulo == "08. Monetização & Scale":
-    play_v8("https://player.vimeo.com/video/253982136", "💰 MONETIZAÇÃO V8", "O plano de ação para cobrar caro por consultoria de implementação de IA.")
+    render_aula(v2, "💰 MONETIZAÇÃO GOD MODE", "O plano de ação para faturar alto implementando essas tecnologias para outros profissionais.")
 
-elif modulo == "🎓 Graduation":
+elif modulo == "🎓 Certificação":
     st.balloons()
-    st.markdown("<h1>🎓 CERTIFICAÇÃO ELITE V8</h1>", unsafe_allow_html=True)
-    nome = st.text_input("NOME PARA O CERTIFICADO:")
-    if st.button("EMITIR DIPLOMA"):
-        st.success(f"PARABÉNS, {nome.upper()}! VOCÊ É UMA ESPECIALISTA MASTER V8.")
+    st.markdown("<h1>🎓 GRADUAÇÃO V8 MASTER</h1>", unsafe_allow_html=True)
+    nome = st.text_input("NOME PARA O REGISTRO OFICIAL:")
+    if st.button("EMITIR CERTIFICADO"):
+        st.success(f"DIPLOMA REGISTRADO: {nome.upper()} AGORA É UMA ESPECIALISTA V8.")
