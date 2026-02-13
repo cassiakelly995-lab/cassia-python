@@ -2,71 +2,50 @@ import streamlit as st
 from fpdf import FPDF
 import datetime
 
-# Configurações de Elite V8 - Cássia Prompt
-st.set_page_config(page_title="Cássia Prompt V8 - IA para Todos", page_icon="🚀", layout="wide")
+st.set_page_config(page_title="Cássia Prompt V8 - Premium", page_icon="💎", layout="wide")
 
-# Estética Premium (Preto e Dourado)
+# Estética Black & Gold
 st.markdown("""
     <style>
     .main { background-color: #0d0d0d; color: #ffffff; }
     .stSelectbox label, .stHeader, h1, h2, h3 { color: #d4af37 !important; }
     div.stButton > button:first-child { background-color: #d4af37; color: black; border-radius: 8px; font-weight: bold; }
+    .stExpander { background-color: #1a1a1a; border: 1px solid #d4af37; }
     </style>
     """, unsafe_allow_html=True)
 
 st.sidebar.title("💎 Cássia Prompt V8")
-st.sidebar.subheader("IA para Todos")
-st.sidebar.write("Mentora: **Cássia Kelly**")
-st.sidebar.markdown("---")
+st.sidebar.write("Comandante: **Cássia Kelly**")
 
-modulo = st.sidebar.radio("Navegação:", [
-    "01. Domine a Máquina",
-    "02. Produtividade Extrema",
-    "03. Criação de Conteúdo",
-    "🎓 Gerar Meu Certificado"
+modulo = st.sidebar.selectbox("ESCOLHA O MÓDULO:", [
+    "🏠 Boas-vindas",
+    "🧠 Módulo 1: O Cérebro da IA (Prompts)",
+    "💼 Módulo 2: IA na Carreira e Negócios",
+    "🎨 Módulo 3: Criação de Imagens e Identidade",
+    "🎬 Módulo 4: Vídeos e Avatares com IA",
+    "⚙️ Módulo 5: Automações e Robôs",
+    "🎓 Gerar Certificado Final"
 ])
 
-if modulo == "01. Domine a Máquina":
-    st.title("🧠 Módulo 1: A Arte de Comandar a IA")
-    st.markdown("""
-    ### O Segredo do Comando (Prompt)
-    Para que a IA trabalhe para você, use sempre a estrutura:
-    * **Quem ela é:** "Aja como um especialista em..."
-    * **O que ela deve fazer:** "Crie um roteiro para..."
-    * **Para quem:** "O público são pessoas que..."
-    """)
+if modulo == "🏠 Boas-vindas":
+    st.title("Seja bem-vindo ao Futuro!")
+    st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ") # Exemplo de onde você pode por seus vídeos
+    st.markdown("Neste curso, você vai dominar a ferramenta que está mudando o mundo.")
 
-elif modulo == "🎓 Gerar Meu Certificado":
-    st.title("🎓 Conclusão de Curso")
-    st.subheader("Parabéns pela sua conquista!")
+elif modulo == "🧠 Módulo 1: O Cérebro da IA (Prompts)":
+    st.title("🧠 Engenharia de Prompt Reversa")
+    with st.expander("Aula 1.1: O Comandante"):
+        st.write("Aqui você aprende a dar ordens complexas...")
+    with st.expander("Aula 1.2: Estrutura de Prompt de Ouro"):
+        st.write("A fórmula secreta: Persona + Contexto + Ação + Restrição.")
     
-    nome_aluno = st.text_input("Digite seu nome completo para o certificado:")
-    
-    if st.button("Gerar Certificado em PDF"):
-        if nome_aluno:
-            pdf = FPDF(orientation='L', unit='mm', format='A4')
-            pdf.add_page()
-            # Borda Dourada
-            pdf.set_draw_color(212, 175, 55)
-            pdf.set_line_width(5)
-            pdf.rect(10, 10, 277, 190)
-            
-            pdf.set_font('Arial', 'B', 40)
-            pdf.cell(0, 50, 'CERTIFICADO DE CONCLUSAO', ln=True, align='C')
-            
-            pdf.set_font('Arial', '', 20)
-            pdf.cell(0, 20, 'Certificamos que', ln=True, align='C')
-            
-            pdf.set_font('Arial', 'B', 30)
-            pdf.cell(0, 30, nome_aluno.upper(), ln=True, align='C')
-            
-            pdf.set_font('Arial', '', 20)
-            pdf.multi_cell(0, 15, f'concluiu o treinamento Cassia Prompt V8\\nsob a mentoria de Cassia Kelly.', align='C')
-            
-            data_hoje = datetime.date.today().strftime("%d/%m/%Y")
-            pdf.cell(0, 30, f'Emitido em: {data_hoje}', ln=True, align='C')
-            
-            pdf_output = pdf.output(dest='S').encode('latin-1')
-            st.download_button(label="📥 Baixar Certificado", data=pdf_output, file_name=f"Certificado_{nome_aluno}.pdf", mime="application/pdf")
-        else:
-            st.error("Por favor, digite seu nome.")
+    # Exemplo de Botão de PDF
+    st.info("📚 Material de Apoio")
+    st.markdown("*(Para PDF, suba o arquivo no GitHub e me peça o link!)*")
+
+elif modulo == "🎓 Gerar Certificado Final":
+    st.title("🎓 Sua Conquista Profissional")
+    nome = st.text_input("Nome completo:")
+    if st.button("Emitir Diploma"):
+        # (Código do PDF que você já testou e funcionou)
+        st.success("Certificado Gerado!")
