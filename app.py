@@ -2,84 +2,89 @@ import streamlit as st
 from fpdf import FPDF
 import datetime
 
-# --- CONFIGURAÇÃO DE ELITE ---
-st.set_page_config(page_title="Cássia Prompt V8 - Elite IA", page_icon="💎", layout="wide")
+# --- CONFIGURAÇÃO DE ALTO PADRÃO ---
+st.set_page_config(page_title="Cássia Prompt V8 - Elite", page_icon="💎", layout="wide")
 
-# --- DESIGN PREMIUM ---
+# --- ESTÉTICA PREMIUM (BLACK & GOLD) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
     html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #000000; color: #FFFFFF; }
-    .stVideo { border: 3px solid #d4af37; border-radius: 15px; }
-    h1, h2, h3 { color: #d4af37 !important; text-align: center; }
-    div.stButton > button { width: 100%; background: #d4af37; color: black; font-weight: bold; border-radius: 10px; }
-    .card { background: #111; padding: 20px; border-radius: 10px; border-left: 5px solid #d4af37; margin-bottom: 20px; }
+    h1, h2, h3 { color: #d4af37 !important; text-align: center; font-weight: 700; }
+    .stVideo { border: 3px solid #d4af37; border-radius: 15px; box-shadow: 0px 0px 20px rgba(212,175,55,0.4); }
+    .card-aula { background: #111; padding: 25px; border-radius: 15px; border-left: 8px solid #d4af37; margin-bottom: 25px; }
+    div.stButton > button { width: 100%; background: linear-gradient(45deg, #d4af37, #f4d03f); color: black !important; font-weight: bold; height: 50px; border-radius: 10px; border: none; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- NAVEGAÇÃO ---
-st.sidebar.title("💎 CÁSSIA PROMPT V8")
-modulo = st.sidebar.selectbox("ESCOLHA SUA JORNADA:", [
-    "01. Boas-vindas & Mentalidade",
-    "02. Engenharia V8 God Mode",
-    "03. IA para Negócios Reais",
-    "04. Conteúdo Infinito 10X",
-    "05. Identidade Visual de Poder",
-    "06. Vídeos e Avatares IA",
+# --- MENU LATERAL ---
+st.sidebar.markdown("<h1 style='text-align: center;'>💎 CÁSSIA PROMPT</h1>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='text-align: center;'>V8 God Mode Edition</p>", unsafe_allow_html=True)
+
+modulo = st.sidebar.selectbox("ESCOLHA O MÓDULO:", [
+    "00. Welcome Experience",
+    "01. Mentalidade Exponencial",
+    "02. Engenharia de Prompt V8",
+    "03. IA para Negócios",
+    "04. Conteúdo Escalar 10X",
+    "05. Autoridade Visual",
+    "06. Vídeos e Avatares",
     "07. Automação de Processos",
-    "08. O Futuro e Monetização",
+    "08. Monetização e Escala",
     "🎓 Certificação Final"
 ])
 
-# --- CONTEÚDO ---
-if modulo == "01. Boas-vindas & Mentalidade":
-    st.title("🚀 Boas-vindas à Revolução V8")
-    st.video("https://www.youtube.com/watch?v=5V9X-CByhYw")
-    st.markdown('<div class="card"><h3>Atividade 01</h3>Imagine que a IA é um estagiário gênios. Liste 3 tarefas chatas que você nunca mais quer fazer na vida.</div>', unsafe_allow_html=True)
+# --- CONTEÚDO DOS MÓDULOS ---
 
-elif modulo == "02. Engenharia V8 God Mode":
-    st.title("🧠 O Protocolo V8 de Comandos")
-    st.video("https://www.youtube.com/watch?v=0_fN_7P11i8")
-    st.markdown("""
-    ### A Fórmula Secreta:
-    **[PERSONA] + [CONTEXTO] + [TAREFA] + [FORMATO]**
-    * **Atividade:** Escreva seu primeiro prompt V8 abaixo.
-    """)
-    st.text_area("Digite seu comando aqui:")
+if modulo == "00. Welcome Experience":
+    st.title("🛡️ BEM-VINDA À FRONTEIRA DA TECNOLOGIA")
+    st.video("https://www.youtube.com/watch?v=A_G3lO_AFeM") # Vídeo Institucional IA
+    st.markdown('<div class="card-aula"><h3>Boas-vindas, Comandante!</h3>Este é o início da sua jornada. Aqui você deixa de ser usuária para se tornar Mestra da Inteligência Artificial. Assista ao vídeo acima para entender o poder do que você tem em mãos.</div>', unsafe_allow_html=True)
 
-elif modulo == "03. IA para Negócios Reais":
-    st.title("💼 IA no Mundo dos Negócios")
+elif modulo == "01. Mentalidade Exponencial":
+    st.title("🚀 Módulo 1: O Fim do Trabalho Linear")
     st.video("https://www.youtube.com/watch?v=m7H09-l-H4U")
-    st.markdown('<div class="card">Como economizar 20 horas por semana usando automação de emails e documentos.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-aula">Nesta aula, quebramos as crenças limitantes. A IA não é uma ferramenta de pesquisa, é um motor de execução que economiza 90% do seu tempo de escritório.</div>', unsafe_allow_html=True)
 
-elif modulo == "04. Conteúdo Infinito 10X":
-    st.title("🎬 Criando Conteúdo em Massa")
-    st.video("https://www.youtube.com/watch?v=A_G3lO_AFeM")
-    st.write("Aprenda a criar 1 mês de conteúdo em apenas 15 minutos.")
+elif modulo == "02. Engenharia de Prompt V8":
+    st.title("🧠 Módulo 2: O Protocolo God Mode V8")
+    st.video("https://www.youtube.com/watch?v=0_fN_7P11i8")
+    st.markdown('<div class="card-aula"><b>Método V8:</b><br>1. Persona de Elite<br>2. Contexto Cirúrgico<br>3. Objetivo Atômico<br>4. Restrição de Saída.</div>', unsafe_allow_html=True)
+    st.text_area("Desafio Prático: Escreva um comando V8 aqui:")
 
-elif modulo == "05. Identidade Visual de Poder":
-    st.title("🎨 Visual de Autoridade")
+elif modulo == "03. IA para Negócios":
+    st.title("💼 Módulo 3: Business Strategy")
+    st.video("https://www.youtube.com/watch?v=K3SAnF_uT_k")
+    st.write("Aprenda a analisar contratos, criar planos de negócios e otimizar o atendimento ao cliente.")
+
+elif modulo == "04. Conteúdo Escalar 10X":
+    st.title("🎬 Módulo 4: Fábrica de Conteúdo")
+    st.video("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+    st.write("Como gerar 30 dias de posts estratégicos em 15 minutos de comando.")
+
+elif modulo == "05. Autoridade Visual":
+    st.title("🎨 Módulo 5: Identidade de Poder")
     st.video("https://www.youtube.com/watch?v=f-N9m1w0w_M")
-    st.write("Crie imagens cinematográficas para suas redes sociais sem gastar 1 real.")
+    st.write("Fotos profissionais e artes cinematográficas usando apenas texto.")
 
-elif modulo == "06. Vídeos e Avatares IA":
-    st.title("🎥 Avatares Digitais")
+elif modulo == "06. Vídeos e Avatares":
+    st.title("🎥 Módulo 6: Clonagem Digital")
     st.video("https://www.youtube.com/watch?v=y7X6A8E19jM")
-    st.write("Sua imagem e voz clonadas para trabalhar 24h por você.")
+    st.write("Sua voz e imagem trabalhando 24h por dia através de avatares de IA.")
 
 elif modulo == "07. Automação de Processos":
-    st.title("⚙️ O Robô que Trabalha")
-    st.video("https://www.youtube.com/watch?v=K3SAnF_uT_k")
-    st.write("Conectando ferramentas para criar fluxos de trabalho automáticos.")
+    st.title("⚙️ Módulo 7: Robôs de Trabalho")
+    st.video("https://www.youtube.com/watch?v=0_fN_7P11i8")
+    st.write("Conectando ferramentas para que o trabalho aconteça sem a sua intervenção.")
 
-elif modulo == "08. O Futuro e Monetização":
-    st.title("💰 Como Ganhar Dinheiro com IA")
+elif modulo == "08. Monetização e Escala":
+    st.title("💰 Módulo 8: Lucro Real com IA")
     st.video("https://www.youtube.com/watch?v=S_O58NfLshI")
-    st.markdown('<div class="card">Venda consultoria de IA por R$ 5.000 ou mais por cliente.</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-aula">Como cobrar caro por consultoria de IA e criar produtos digitais que vendem no automático.</div>', unsafe_allow_html=True)
 
 elif modulo == "🎓 Certificação Final":
-    st.title("🎓 Diploma de Elite")
-    nome = st.text_input("NOME PARA O CERTIFICADO:")
-    if st.button("GERAR MEU CERTIFICADO"):
+    st.title("🎓 DIPLOMA DE EXCELÊNCIA")
+    nome = st.text_input("NOME COMPLETO DO FORMANDO:")
+    if st.button("GERAR CERTIFICADO"):
         st.balloons()
-        st.success(f"Parabéns, {nome}! Você concluiu o curso de tecnologia mais completo do mercado.")
+        st.success(f"Parabéns, {nome}! Você é oficialmente uma Especialista Cássia Prompt V8.")
