@@ -1,97 +1,117 @@
 import streamlit as st
-import random
+import pandas as pd
+import plotly.express as px
 
-# --- CONFIGURAÇÃO DE ALTA PATENTE ---
-st.set_page_config(page_title="V8 GOD MODE | THE ORACLE", page_icon="🔱", layout="wide")
+# --- CONFIGURAÇÃO DE ELITE V8 ---
+st.set_page_config(page_title="V8 NEXUS | COMMAND CENTER", page_icon="🔱", layout="wide")
 
-# --- DESIGN CYBER-LUXURY ---
+# --- CSS AVANÇADO (MERCADO DE LUXO) ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Syncopate:wght@400;700&family=Inter:wght@300;400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Syncopate:wght@700&family=Inter:wght@300;600&display=swap');
     
-    .stApp { background: radial-gradient(circle at top right, #1a1a1a, #000); color: #e0e0e0; font-family: 'Inter', sans-serif; }
-    .v8-card { background: rgba(20, 20, 20, 0.85); backdrop-filter: blur(20px); border: 1px solid rgba(212, 175, 55, 0.4); border-radius: 30px; padding: 40px; box-shadow: 0 25px 60px rgba(0,0,0,0.8); margin: 20px 0; }
-    h1 { font-family: 'Orbitron', sans-serif; background: linear-gradient(180deg, #d4af37 0%, #8a6d1d 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 3.5em !important; text-align: center; letter-spacing: 8px; font-weight: 900; }
-    .post-box { background: #111; border-left: 5px solid #d4af37; padding: 25px; border-radius: 10px; margin-top: 20px; font-family: 'Inter', sans-serif; }
-    .channel-tag { background: #d4af37; color: black; padding: 3px 12px; border-radius: 5px; font-weight: bold; font-size: 0.8em; text-transform: uppercase; }
-    .stButton>button { background: linear-gradient(135deg, #d4af37, #8a6d1d); color: black; font-weight: 900; border: none; border-radius: 12px; height: 50px; transition: 0.3s; font-family: 'Syncopate'; }
-    .stButton>button:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+    .stApp { background: #000; color: #fff; font-family: 'Inter', sans-serif; }
+    
+    /* Cartão Nexus com efeito Glow */
+    .nexus-card {
+        background: rgba(15, 15, 15, 0.9);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+        transition: 0.5s;
+    }
+    .nexus-card:hover { border-color: #d4af37; box-shadow: 0 0 60px rgba(212, 175, 55, 0.2); }
+
+    h1 { font-family: 'Orbitron', sans-serif; font-weight: 900; letter-spacing: 15px; background: linear-gradient(90deg, #d4af37, #fff, #d4af37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
+    
+    .stButton>button {
+        width: 100%;
+        background: transparent;
+        color: #d4af37;
+        border: 2px solid #d4af37;
+        font-family: 'Syncopate';
+        font-weight: 700;
+        border-radius: 10px;
+        height: 60px;
+        transition: 0.4s;
+    }
+    .stButton>button:hover { background: #d4af37; color: #000; box-shadow: 0 0 30px #d4af37; }
+    
+    .status-box { padding: 15px; border-radius: 10px; text-align: center; font-weight: bold; font-family: 'Orbitron'; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- MOTOR DE INTELIGÊNCIA V8 ---
-def criar_post_v8(nicho, objetivo, nivel):
-    estilos = [
-        {
-            "canal": "REELS / TIKTOK",
-            "gancho": f"O erro que está destruindo sua autoridade em {nicho}.",
-            "legenda": f"Você continua agindo como amador e espera resultados de elite? Em {nicho}, quem não domina a estratégia vira estatística. \n\nPara resolver isso: \n1. Pare de focar no óbvio. \n2. Aplique o Protocolo V8. \n\nComenta 'ESCALA' para o próximo nível.",
-            "visual": "Vídeo rápido, cortes secos, música de impacto (Phonk ou Cinematic)."
-        },
-        {
-            "canal": "FEED (CARROSSEL)",
-            "gancho": f"5 Pilares do {nicho} que os grandes não te contam.",
-            "legenda": f"O mercado está saturado de pessoas comuns. Se você quer {objetivo}, precisa de diferenciação técnica. Arraste para o lado e entenda o jogo dos 1%.",
-            "visual": "Design Black & Gold, fontes grandes e minimalistas."
-        },
-        {
-            "canal": "LINKEDIN / ARTIGO",
-            "gancho": f"A análise técnica sobre o futuro de {nicho}.",
-            "legenda": f"Vivemos uma era de transição em {nicho}. A eficiência não é mais um diferencial, é sobrevivência. Como estamos posicionando nossos clientes para {objetivo}...",
-            "visual": "Foto profissional em ambiente de negócios (High-end)."
-        }
-    ]
-    return random.choice(estilos)
+# --- ENGINE DE CONTEÚDO ---
+def get_copy(estilo, nicho):
+    if estilo == "AGRESSIVO":
+        return f"O mercado de {nicho} está cheio de amadores. Se você não é a autoridade, você é a presa. O Protocolo V8 não é para quem quer tentar, é para quem quer dominar."
+    elif estilo == "TÉCNICO":
+        return f"A análise estrutural de {nicho} revela uma falha na conversão de leads de alto ticket. A solução reside na implementação de processos V8 de autoridade validada."
+    return f"Imagine ter a clareza total de como se posicionar em {nicho}. Onde cada post atrai o cliente certo e repele o curioso. Isso é V8."
 
-# --- INTERFACE ---
-st.markdown("<h1>V8 GOD MODE</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; letter-spacing:5px; color:#888;'>THE WORLD'S MOST ADVANCED AUDIT SYSTEM</p>", unsafe_allow_html=True)
+# --- INTERFACE PRINCIPAL ---
+st.markdown("<h1>V8 NEXUS</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#666; letter-spacing:3px;'>ELITE COMMAND & CONTENT ENGINE</p>", unsafe_allow_html=True)
 
 with st.container():
-    st.markdown("<div class='v8-card'>", unsafe_allow_html=True)
-    c1, c2, c3 = st.columns(3)
-    with c1: nome = st.text_input("IDENTIFICAÇÃO DO ALVO", placeholder="NOME...")
-    with c2: nicho = st.text_input("ÁREA TÉCNICA (NICHO)", placeholder="DIREITO, BUSINESS...")
-    with c3: obj = st.text_input("OBJETIVO DE ESCALA", placeholder="VENDAS, AUTORIDADE...")
+    st.markdown("<div class='nexus-card'>", unsafe_allow_html=True)
     
+    # INPUTS INTERATIVOS
+    c1, c2, c3 = st.columns(3)
+    with c1: 
+        nome = st.text_input("💎 NOME DO PROJETO", "Cássia V8")
+    with c2: 
+        nicho = st.text_input("🎯 NICHO", "Direito de Elite")
+    with c3: 
+        estilo_copy = st.selectbox("🎭 TOM DA VOZ", ["AGRESSIVO", "TÉCNICO", "MAGNÉTICO"])
+
     st.markdown("---")
-    st.markdown("### ⚡ PARÂMETROS DE COMPETÊNCIA")
-    ca, cb = st.columns(2)
-    with ca:
-        s1 = st.slider("COMUNICAÇÃO", 0, 10, 5)
-        s2 = st.slider("AUTORIDADE", 0, 10, 5)
-    with cb:
-        s3 = st.slider("POSICIONAMENTO", 0, 10, 5)
-        s4 = st.slider("ESTÉTICA VISUAL", 0, 10, 5)
+    
+    # SLIDERS COM GRÁFICO EM TEMPO REAL
+    col_sliders, col_grafico = st.columns([1, 1])
+    
+    with col_sliders:
+        st.markdown("### 📊 PARAMETRIZAÇÃO")
+        s1 = st.slider("COMUNICAÇÃO", 0, 10, 7)
+        s2 = st.slider("AUTORIDADE", 0, 10, 4)
+        s3 = st.slider("ESTRATÉGIA", 0, 10, 6)
+        s4 = st.slider("VISUAL", 0, 10, 5)
+        s5 = st.slider("CONVERSÃO", 0, 10, 3)
 
-    if st.button("🔥 ATIVAR ORÁCULO E GERAR CONTEÚDO DE ELITE"):
-        avg = (s1+s2+s3+s4)/4
-        post_pronto = criar_post_v8(nicho, obj, avg)
-        
+    with col_grafico:
+        # Gráfico Radar Interativo
+        df_radar = pd.DataFrame(dict(
+            r=[s1, s2, s3, s4, s5],
+            theta=['Comunicação', 'Autoridade', 'Estratégia', 'Visual', 'Conversão']))
+        fig = px.line_polar(df_radar, r='r', theta='theta', line_close=True, range_r=[0,10])
+        fig.update_traces(fill='toself', line_color='#d4af37')
+        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)', font_color="#fff")
+        st.plotly_chart(fig, use_container_width=True)
+
+    if st.button("🚀 GERAR ECOSSISTEMA V8"):
         st.markdown("---")
-        st.markdown(f"### 🛡️ VEREDITO V8: {'GOD MODE' if avg > 8 else 'NECESSITA AJUSTE CRÍTICO'}")
         
-        # BIO E POSICIONAMENTO
-        st.markdown("#### 🖋️ BIO MAGNÉTICA ATUALIZADA")
-        st.code(f"⚖️ Especialista em {nicho}\n🏛️ {obj} via Protocolo V8\n🔒 Autoridade Validada pelo Mercado\n👇 Conquiste sua posição de elite aqui:")
+        # ÁREA DE RESULTADOS INTERATIVOS
+        res1, res2 = st.columns(2)
+        
+        with res1:
+            st.markdown("### ✍️ SCRIPT DE POSTAGEM")
+            copy_gerada = get_copy(estilo_copy, nicho)
+            st.info(copy_gerada)
+            st.caption("📍 Postar no: FEED (Imagem com olhar de poder)")
+            
+        with res2:
+            st.markdown("### 📱 SEQUÊNCIA DE STORIES (HOJE)")
+            st.write("1. **Story 1:** Foto do café/mesa de trabalho: 'O jogo mudou'.")
+            st.write("2. **Story 2:** Enquete: 'Você prefere autoridade ou lucro?'.")
+            st.write("3. **Story 3:** Vídeo curto explicando a lacuna de " + nicho + ".")
+            st.write("4. **Story 4:** CTA: 'Mande V8 no direct'.")
 
-        # POST COMPLETO
-        st.markdown(f"### 🎬 POST DE ELITE GERADO")
-        st.markdown(f"<span class='channel-tag'>{post_pronto['canal']}</span>", unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class='post-box'>
-            <p><b>GANCHO (Headline):</b> {post_pronto['gancho']}</p>
-            <p><b>LEGENDA:</b><br>{post_pronto['legenda']}</p>
-            <p><b>DIRETRIZ VISUAL:</b> {post_pronto['visual']}</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("### 🗺️ ONDE POSTAR E POR QUÊ?")
-        if post_pronto['canal'] == "REELS / TIKTOK":
-            st.write("📍 **Por que:** Para atrair novos seguidores (Top of Funnel) e quebrar o padrão de postagens estáticas.")
-        elif post_pronto['canal'] == "FEED (CARROSSEL)":
-            st.write("📍 **Por que:** Para educar seu público e salvar o post, o que aumenta absurdamente seu alcance orgânico.")
+        st.markdown("### 💡 VEREDITO DO SISTEMA")
+        if (s1+s2+s3+s4+s5)/5 < 6:
+            st.markdown("<div class='status-box' style='background:#ff4b4b; color:white;'>STATUS: ALERTA DE OBSOLESCÊNCIA</div>", unsafe_allow_html=True)
         else:
-            st.write("📍 **Por que:** Para reforçar sua autoridade intelectual e atrair parceiros de alto ticket.")
-
+            st.markdown("<div class='status-box' style='background:#d4af37; color:black;'>STATUS: DOMÍNIO DE MERCADO</div>", unsafe_allow_html=True)
+            
     st.markdown("</div>", unsafe_allow_html=True)
