@@ -3,112 +3,102 @@ import pandas as pd
 import plotly.express as px
 
 # --- CONFIGURAÇÃO DE ALTA PATENTE ---
-st.set_page_config(page_title="V8 OMNIPOTENCE", page_icon="🔱", layout="wide")
+st.set_page_config(page_title="V8 GOD MODE | ELITE", page_icon="🔱", layout="wide")
 
-# --- DESIGN HUD CYBER-LUXURY (PRETO & OURO) ---
+# --- DESIGN HUD SUPREMO ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=JetBrains+Mono:wght@400;700&display=swap');
-    
-    .stApp { background: #000; color: #fff; font-family: 'JetBrains Mono', monospace; }
-    
-    .v8-panel {
-        background: rgba(10, 10, 10, 0.95);
-        border: 2px solid #d4af37;
-        padding: 40px;
-        border-radius: 0 50px 0 50px;
-        box-shadow: 0 0 100px rgba(212, 175, 55, 0.2);
-    }
-
-    h1, h2, h3 { font-family: 'Orbitron', sans-serif; color: #d4af37; letter-spacing: 5px; }
-    
-    .stButton>button {
-        background: linear-gradient(90deg, #8a6d1d, #d4af37);
-        color: #000; font-family: 'Orbitron'; font-weight: 900;
-        height: 70px; width: 100%; border-radius: 5px; border: none;
-        font-size: 1.2rem; transition: 0.5s;
-    }
-    .stButton>button:hover { box-shadow: 0 0 60px #d4af37; transform: translateY(-5px); }
-
-    .network-card {
-        background: #0a0a0a; border-left: 5px solid #d4af37;
-        padding: 20px; margin-bottom: 20px; border-radius: 10px;
-    }
-    
-    .stTextArea textarea { background: #111 !important; color: #d4af37 !important; border: 1px solid #333 !important; }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=JetBrains+Mono:wght@300;700&display=swap');
+    .stApp { background: radial-gradient(circle, #111 0%, #000 100%); color: #fff; font-family: 'JetBrains Mono', monospace; }
+    .v8-card { background: rgba(0, 0, 0, 0.9); border: 2px solid #d4af37; border-radius: 20px; padding: 40px; box-shadow: 0 0 60px rgba(212, 175, 55, 0.15); }
+    h1, h2 { font-family: 'Orbitron', sans-serif; color: #d4af37; text-align: center; letter-spacing: 4px; }
+    .stButton>button { background: linear-gradient(90deg, #8a6d1d, #d4af37); color: #000; font-family: 'Orbitron'; font-weight: 900; height: 60px; border: none; transition: 0.4s; }
+    .stButton>button:hover { box-shadow: 0 0 40px #d4af37; transform: translateY(-3px); }
+    .tip-box { background: rgba(212, 175, 55, 0.1); border-left: 5px solid #d4af37; padding: 15px; margin: 10px 0; border-radius: 5px; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- SISTEMA DE INTELIGÊNCIA V8 ---
-st.markdown("<h1>V8 OMNIPOTENCE SYSTEM</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#666;'>[ STATUS: MAXIMUM POWER | OPERATOR: CÁSSIA ]</p>", unsafe_allow_html=True)
+st.markdown("<h1>V8 GOD MODE: ELITE EDITION</h1>", unsafe_allow_html=True)
 
 with st.container():
-    st.markdown("<div class='v8-panel'>", unsafe_allow_html=True)
+    st.markdown("<div class='v8-card'>", unsafe_allow_html=True)
     
-    # MATRIZ DE ENTRADA INTERATIVA
-    col1, col2 = st.columns(2)
+    # MATRIZ DE ENTRADA (INTELIGÊNCIA DE PERFIL)
+    col1, col2, col3 = st.columns(3)
     with col1:
         nome = st.text_input("💎 NOME DO OPERADOR:", "Cássia Kelly")
-        nicho = st.text_input("🎯 NICHO DE DOMÍNIO:", "Estrategista Digital")
-        xp = st.text_input("⏳ TEMPO DE MERCADO:", "10 Anos")
+        nicho = st.text_input("🎯 NICHO/SETOR:", "Estrategista de Elite")
     with col2:
-        metodo = st.text_input("🔥 MÉTODO PRÓPRIO:", "Protocolo V8")
-        target = st.text_input("🚀 ALVO (PÚBLICO-ALVO):", "Empresários High-Ticket")
-        objetivo = st.selectbox("🎯 OBJETIVO DA PRESENÇA:", ["DOMÍNIO DE MERCADO", "VENDA DE HIGH-TICKET", "AUTORIDADE MÁXIMA"])
+        momento = st.selectbox("🚦 MOMENTO ATUAL:", ["ESTOU COMEÇANDO (DO ZERO)", "JÁ ESTOU NO MERCADO (ESCALA)"])
+        poder = st.text_input("🔥 SUA MAIOR HABILIDADE:", "Método V8")
+    with col3:
+        target = st.text_input("🚀 PÚBLICO ALVO:", "High-Ticket")
+        ticket = st.text_input("💰 VALOR MÉDIO SERVIÇO:", "R$ 5.000,00")
 
     st.markdown("---")
-    
-    # SCANNER DE STATUS (RADAR)
-    col_l, col_r = st.columns([1, 1.2])
-    with col_l:
-        st.markdown("### [ 🧠 SCANNER DE ATRIBUTOS ]")
-        s1 = st.slider("AUTORIDADE PERCEBIDA", 0, 10, 5)
-        s2 = st.slider("PODER DE COMUNICAÇÃO", 0, 10, 5)
-        s3 = st.slider("DESIGN ESTRATÉGICO", 0, 10, 5)
-        s4 = st.slider("ESCALABILIDADE", 0, 10, 5)
-    with col_r:
-        df = pd.DataFrame(dict(r=[s1, s2, s3, s4], theta=['Autoridade', 'Comunicação', 'Design', 'Escala']))
-        fig = px.line_polar(df, r='r', theta='theta', line_close=True)
-        fig.update_traces(fill='toself', line_color='#d4af37', fillcolor='rgba(212,175,55,0.2)')
-        fig.update_layout(paper_bgcolor='rgba(0,0,0,0)', font_color="#d4af37", polar=dict(bgcolor='rgba(0,0,0,0)'))
-        st.plotly_chart(fig, use_container_width=True)
 
-    if st.button("🔥 EXECUTAR ARQUITETURA OMNICHANNEL"):
-        st.markdown("---")
-        st.markdown("### 📊 DOSSIÊ FINAL: PERFIL DE ELITE MONTADO")
+    if st.button("🔥 EXECUTAR PROTOCOLO GENESIS COMPLETASSO"):
+        st.markdown("### 📊 ARQUITETURA DE IMPACTO OMNICHANNEL")
         
-        # INTERFACE DE RESULTADO MULTI-REDES
-        tabs = st.tabs(["📸 INSTAGRAM", "💼 LINKEDIN", "👥 FACEBOOK", "📜 CURRÍCULO V8"])
+        tab1, tab2, tab3, tab4 = st.tabs(["📸 INSTAGRAM ELITE", "💼 LINKEDIN MASTER", "📄 CURRICULUM V8 (COMPLETASSO)", "💡 DICAS DE MESTRE"])
         
-        with tabs[0]:
-            st.markdown("<div class='network-card'>", unsafe_allow_html=True)
-            st.subheader("Arquitetura Instagram")
-            st.text_input("Nome do Usuário (Sugerido):", f"@{nome.lower().replace(' ', '')}_v8")
-            st.text_area("BIO (Otimizada):", f"⚖️ {nicho}\n🏆 {xp} | Criadora do {metodo}\n💎 Elevando {target} ao Nível Elite.\n👇 Aplique para a Consultoria:", height=120)
-            st.info("**ESTRATÉGIA DE DESTAQUES:** 1. Método V8 | 2. Resultados | 3. Comece Aqui")
-            st.markdown("</div>", unsafe_allow_html=True)
+        # Lógica de Conteúdo Personalizada
+        if momento == "ESTOU COMEÇANDO (DO ZERO)":
+            foco_insta = f"💎 Especialista em {nicho}\n⚡ Mentorada pelo {poder}\n🎯 Transformando teoria em lucro para {target}\n👇 Entre na lista de espera:"
+            foco_cv = f"Profissional focado em {nicho} com alta densidade técnica no {poder}. Especialista em viabilizar resultados para {target} através de processos de elite, priorizando eficiência e posicionamento premium."
+            dicas = [
+                "**Quebra de Objeção:** Como você é nova, foque em postar 'Bastidores de Estudo'. Mostre que você domina a técnica que os veteranos esqueceram.",
+                "**Visual:** Use fotos com roupas de tons neutros (preto, branco, cinza) para transmitir seriedade imediata.",
+                "**Networking:** Comente em posts de grandes players com análises técnicas, não apenas elogios."
+            ]
+        else:
+            foco_insta = f"🏛️ Autoridade em {nicho}\n🚀 Criadora do {poder}\n📈 + de [X] resultados gerados para {target}\n👇 Clique para Escalar:"
+            foco_cv = f"Líder estratégico em {nicho} com histórico comprovado de escala através do {poder}. Expert em gestão de branding e conversão High-Ticket para {target}, focado em perpetuar lucros e legado."
+            dicas = [
+                "**Escala:** Pare de falar de 'como fazer' e comece a falar de 'como delegar' ou 'estratégia macro'.",
+                "**Exclusividade:** Seu perfil deve parecer um clube fechado. Menos posts, mais profundidade.",
+                "**Lifestyle:** Mostre o resultado da sua liberdade para atrair quem deseja o mesmo estilo de vida."
+            ]
 
-        with tabs[1]:
-            st.markdown("<div class='network-card'>", unsafe_allow_html=True)
-            st.subheader("Arquitetura LinkedIn")
-            st.text_input("Título Profissional (Headline):", f"{nicho} | Especialista em {metodo} | Focada em Gerar Escala para {target}")
-            st.text_area("RESUMO 'SOBRE' (Copy de Alto Valor):", f"Estrategista com {xp} de experiência. Utilizo o {metodo} para transformar a presença digital de {target} em máquinas de lucro. Especialidades: {nicho} e Posicionamento de Luxo.", height=200)
-            st.markdown("</div>", unsafe_allow_html=True)
+        with tab1:
+            st.markdown("<div class='tip-box'><b>BIO COPIÁVEL:</b></div>", unsafe_allow_html=True)
+            st.code(foco_insta)
+            st.markdown("**ESTRATÉGIA DE FEED:** Foque em 3 posts fixados: 1. Quem sou eu | 2. Como o {poder} funciona | 3. Prova de autoridade.")
 
-        with tabs[2]:
-            st.markdown("<div class='network-card'>", unsafe_allow_html=True)
-            st.subheader("Arquitetura Facebook (Fanpage)")
-            st.text_input("Categoria:", "Consultoria de Negócios")
-            st.text_area("Informações Adicionais (About):", f"Página oficial de {nome}. Focada em disseminar a cultura do {metodo} e elevar o nível de {nicho} no mercado atual.", height=100)
-            st.markdown("</div>", unsafe_allow_html=True)
+        with tab2:
+            st.subheader("Headline & About")
+            st.code(f"{nicho} | Especialista em {poder} | Estrategista para {target}")
+            st.text_area("SOBRE (EDITÁVEL):", foco_cv, height=150)
 
-        with tabs[3]:
-            st.markdown("<div class='network-card'>", unsafe_allow_html=True)
-            st.subheader("Dossiê de Carreira")
-            cv = f"Dossiê Profissional: {nome}\nStatus: {objetivo}\nMetodologia: {metodo}\n\nO mercado de {nicho} exige o nível V8. Este currículo reflete a autoridade de quem domina {target}."
-            st.text_area("CURRÍCULO EDITÁVEL:", cv, height=200)
-            st.download_button("📥 BAIXAR DOSSIÊ", cv, file_name="v8_dossie.txt")
-            st.markdown("</div>", unsafe_allow_html=True)
+        with tab3:
+            st.subheader("📄 CURRICULUM VITAE V8 (COMPLETASSO)")
+            cv_full = f"""
+NOME: {nome.upper()}
+OBJETIVO: {nicho} High-Ticket
+---------------------------------------------------------
+RESUMO EXECUTIVO:
+{foco_cv}
+
+DOMÍNIO TÉCNICO:
+- Implementação do {poder}
+- Análise Preditiva de Mercado
+- Gestão de Imagem e Autoridade para {target}
+
+EXPERIÊNCIA E FORMAÇÃO:
+- Especialização em Estratégias de Elite V8
+- Desenvolvimento de Metodologias Próprias
+- Consultoria para Projetos de Alto Valor
+
+CONTATO:
+[SEU EMAIL AQUI] | [SEU WHATSAPP AQUI]
+---------------------------------------------------------
+            """
+            st.text_area("COPIE SEU CURRÍCULO AQUI:", cv_full, height=350)
+            st.download_button("📥 BAIXAR CURRÍCULO", cv_full, file_name="curriculo_v8_elite.txt")
+
+        with tab4:
+            st.subheader("🧠 DICAS DE POSICIONAMENTO PARA ARRASAR")
+            for dica in dicas:
+                st.markdown(f"<div class='tip-box'>{dica}</div>", unsafe_allow_html=True)
 
     st.markdown("</div>", unsafe_allow_html=True)
