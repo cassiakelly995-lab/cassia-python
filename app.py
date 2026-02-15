@@ -1,68 +1,89 @@
 import streamlit as st
-from sqlalchemy import create_engine, Column, Integer, String, Float, Text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import pandas as pd
 
 # --- CONFIGURAÇÃO DE ELITE ---
-st.set_page_config(page_title="V8 Social Auditor", page_icon="🛡️", layout="wide")
+st.set_page_config(page_title="V8 God Mode | Auditoria Inteligente", page_icon="🛡️", layout="wide")
 
-# --- BANCO DE DADOS ---
-Base = declarative_base()
-class Auditoria(Base):
-    __tablename__ = 'v8_audits'
-    id = Column(Integer, primary_key=True)
-    nome = Column(String)
-    rede = Column(String)
-    score = Column(Float)
-    status = Column(String)
-
-engine = create_engine('sqlite:///v8_database.db')
-Base.metadata.create_all(engine)
-Session = sessionmaker(bind=engine)
-
-# --- ESTILO V8 ---
+# --- ESTILO VISUAL IMPACTANTE ---
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-    .stApp { background-color: #000; color: #fff; }
-    h1, h2 { font-family: 'Orbitron', sans-serif; color: #d4af37 !important; text-align: center; }
-    .report-card { background: #111; padding: 25px; border-left: 8px solid #d4af37; border-radius: 10px; }
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;700&display=swap');
+    .stApp { background-color: #050505; color: #fff; font-family: 'Inter', sans-serif; }
+    h1, h2, h3 { font-family: 'Orbitron', sans-serif; color: #d4af37 !important; text-align: center; text-transform: uppercase; letter-spacing: 2px; }
+    .stSlider [data-baseweb="slider"] { margin-bottom: 25px; }
+    .report-card { background: linear-gradient(145deg, #111, #000); padding: 30px; border: 1px solid #d4af37; border-radius: 20px; box-shadow: 0 10px 30px rgba(212,175,55,0.2); margin: 20px 0; }
+    .bio-box { background: #1a1a1a; padding: 20px; border-radius: 10px; border-left: 5px solid #d4af37; font-style: italic; color: #aaa; margin: 10px 0; }
+    .status-badge { padding: 5px 15px; border-radius: 50px; font-weight: bold; text-transform: uppercase; font-size: 0.8em; }
+    .fail { background: #ff4b4b; color: white; }
+    .elite { background: #d4af37; color: black; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- INTERFACE ---
-st.title("🛡️ V8 SOCIAL COMPETENCE")
-st.subheader("SISTEMA DE ANÁLISE CRÍTICA")
+# --- CABEÇALHO ---
+st.markdown("<h1>🛡️ V8 SOCIAL AUDITOR - ELITE EDITION</h1>", unsafe_allow_html=True)
 
+# --- ENTRADA DE DADOS ---
 with st.sidebar:
-    st.header("CADASTRO")
-    nome_perfil = st.text_input("Perfil")
-    rede_sel = st.selectbox("Rede", ["Instagram", "LinkedIn", "TikTok", "OUTROS"])
-    rede = st.text_input("Qual rede?") if rede_sel == "OUTROS" else rede_sel
-    nicho = st.text_input("Nicho")
+    st.markdown("### 🛠️ CONFIGURAÇÃO DO ALVO")
+    nome = st.text_input("NOME DO PERFIL", placeholder="Ex: Dra. Ana Paula")
+    plataforma = st.selectbox("PLATAFORMA", ["Instagram", "LinkedIn", "TikTok", "YouTube", "OUTROS"])
+    if plataforma == "OUTROS":
+        plataforma = st.text_input("QUAL?")
+    nicho = st.text_input("NICHO / ESPECIALIDADE", placeholder="Ex: Direito Civil")
+    obj = st.selectbox("OBJETIVO", ["Venda de Consultoria", "Autoridade Acadêmica", "Escala de Curso", "Atração de Clientes"])
 
-st.markdown("### ⚡ AVALIAÇÃO (0-10)")
-c1, c2 = st.columns(2)
-with c1:
-    s1 = st.slider("Comunicação", 0, 10, 5)
-    s2 = st.slider("Autoridade", 0, 10, 5)
-with c2:
-    s3 = st.slider("Posicionamento", 0, 10, 5)
-    s4 = st.slider("Técnica", 0, 10, 5)
+# --- SISTEMA DE PONTUAÇÃO ---
+col1, col2 = st.columns(2)
+with col1:
+    s_comm = st.slider("🗣️ COMUNICAÇÃO", 0, 10, 5)
+    s_auth = st.slider("🏛️ AUTORIDADE", 0, 10, 5)
+    s_clar = st.slider("💡 CLAREZA", 0, 10, 5)
+with col2:
+    s_pos = st.slider("🎯 POSICIONAMENTO", 0, 10, 5)
+    s_tech = st.slider("⚙️ TÉCNICA/ESTÉTICA", 0, 10, 5)
+    s_cons = st.slider("⏳ CONSISTÊNCIA", 0, 10, 5)
 
-if st.button("EXECUTAR AUDITORIA SEVERA"):
-    avg = (s1 + s2 + s3 + s4) / 4
-    status = "FRACO" if avg < 5 else "INCONSISTENTE" if avg < 7 else "ELITE"
+# --- LÓGICA DE INTELIGÊNCIA V8 ---
+if st.button("🔥 EXECUTAR ANÁLISE E GERAR ESTRATÉGIA"):
+    avg = (s_comm + s_auth + s_clar + s_pos + s_tech + s_cons) / 6
     
-    st.markdown(f"<div class='report-card'><h2>RESULTADO: {status}</h2>", unsafe_allow_html=True)
-    st.metric("Score V8", f"{avg:.2f}")
+    # Classificação
+    status = "ELITE" if avg >= 8.5 else "PROMISSOR" if avg >= 6 else "INCONSISTENTE"
+    badge_class = "elite" if status == "ELITE" else "fail"
+
+    st.markdown(f"<div class='report-card'>", unsafe_allow_html=True)
+    st.markdown(f"<h2>DIAGNÓSTICO: <span class='status-badge {badge_class}'>{status}</span></h2>", unsafe_allow_html=True)
+    st.metric("SCORE DE MATURIDADE V8", f"{avg:.2f}")
+
+    # --- GERADOR DE BIO INTELIGENTE ---
+    st.markdown("### 📝 NOVA BIO SUGERIDA (COPIAR/COLAR)")
+    bio = f"⚖️ {nicho}\n📍 Especialista em {obj}\n🚀 Transformando complexidade em solução.\n👇 Agende sua consulta aqui:"
+    st.markdown(f"<div class='bio-box'>{bio}</div>", unsafe_allow_html=True)
+
+    # --- PLANO DE ATAQUE CRÍTICO ---
+    st.markdown("### ⚡ PLANO DE ATAQUE (PRÓXIMOS 7 DIAS)")
     
-    if avg < 6:
-        st.error("🛑 FALHA CRÍTICA DETECTADA: Desempenho abaixo do padrão V8.")
-    
-    # Salvar no Banco
-    session = Session()
-    session.add(Auditoria(nome=nome_perfil, rede=rede, score=avg, status=status))
-    session.commit()
-    session.close()
-    st.toast("Relatório Salvo com Sucesso.")
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.markdown("**PARA O FEED (AUTORIDADE):**")
+        if s_auth < 7:
+            st.write("1. Post de 'Bastidores de um caso real' (borrando dados).")
+            st.write("2. Carrossel: '3 erros que seu advogado não te conta'.")
+        else:
+            st.write("1. Artigo de opinião sobre nova lei.")
+            st.write("2. Vídeo de Lifestyle de alto padrão + Insight jurídico.")
+
+    with col_b:
+        st.markdown("**PARA OS STORIES (CONEXÃO):**")
+        st.write("1. Box de perguntas: 'Dúvida do dia'.")
+        st.write("2. Narrativa: 'Por que eu escolhi o " + nicho + "'.")
+
+    # --- RELATÓRIO TÉCNICO ---
+    st.markdown("### 📊 LACUNAS DETECTADAS")
+    scores = {"Comunicação": s_comm, "Autoridade": s_auth, "Clareza": s_clar, "Posicionamento": s_pos, "Técnica": s_tech, "Consistência": s_cons}
+    for k, v in scores.items():
+        if v < 6:
+            st.warning(f"🚨 **{k.upper()}**: Nota {v}. Você está perdendo dinheiro por falta de clareza nesta área.")
+        
+    st.markdown("</div>", unsafe_allow_html=True)
+    st.success("✅ Relatório V8 Gerado com Sucesso. Comande o mercado!")
