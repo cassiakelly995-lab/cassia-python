@@ -1,94 +1,117 @@
 import streamlit as st
+import pandas as pd
+from sqlalchemy import create_engine, Column, Integer, String, Float, Text
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-# --- CONFIGURAÇÃO DE ALTA RESILIÊNCIA ---
-st.set_page_config(page_title="Cássia Prompt V8 | Elite", page_icon="💎", layout="wide")
+# --- CONFIGURAÇÃO DE ELITE V8 ---
+st.set_page_config(page_title="V8 Social Competence | Auditoria", page_icon="💎", layout="wide")
 
-# --- DESIGN BLACK & GOLD ---
+# --- BANCO DE DADOS (SQLite) ---
+Base = declarative_base()
+class ProfileV8(Base):
+    __tablename__ = 'profiles_v8'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    platform = Column(String)
+    followers = Column(Integer)
+    niche = Column(String)
+    diagnosis = Column(Text)
+    score_final = Column(Float)
+
+engine = create_engine('sqlite:///v8_competence.db')
+Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
+
+# --- ESTÉTICA DO SISTEMA ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
-    .stApp { background-color: #000000; color: #ffffff; }
-    h1, h2 { font-family: 'Orbitron', sans-serif; color: #d4af37 !important; text-align: center; }
-    
-    .video-container {
-        position: relative;
-        padding-bottom: 56.25%; /* Proporção 16:9 */
-        height: 0;
-        overflow: hidden;
-        max-width: 100%;
-        background: #111;
-        border: 4px solid #d4af37;
-        border-radius: 20px;
-        box-shadow: 0px 0px 30px rgba(212, 175, 55, 0.5);
-    }
-    .video-container iframe, .video-container video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-    .card-v8 {
-        background: rgba(212, 175, 55, 0.1);
-        padding: 20px;
-        border-radius: 15px;
-        border-left: 8px solid #d4af37;
-        margin-top: 15px;
-    }
+    .stApp { background-color: #000; color: #fff; }
+    h1, h2, h3 { font-family: 'Orbitron', sans-serif; color: #d4af37 !important; text-align: center; }
+    .stButton>button { background: linear-gradient(135deg, #d4af37, #aa841e); color: black; font-weight: bold; width: 100%; border: none; }
+    .report-card { background: #111; padding: 20px; border-left: 8px solid #d4af37; border-radius: 10px; margin: 15px 0; }
     </style>
     """, unsafe_allow_html=True)
 
-def play_v8(url, titulo, descricao):
-    st.markdown(f"<h1>{titulo}</h1>", unsafe_allow_html=True)
-    # Usando o player estável do YouTube com parâmetros de bypass
-    video_id = url.split("v=")[-1]
-    st.markdown(f"""
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/{video_id}?rel=0&modestbranding=1&autohide=1&showinfo=0&autoplay=1&mute=1" 
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        """, unsafe_allow_html=True)
-    st.markdown(f"<div class='card-v8'><h3>📑 Missão:</h3><p>{descricao}</p></div>", unsafe_allow_html=True)
+# --- INTERFACE DE COMANDO ---
+st.title("🛡️ V8 SOCIAL COMPETENCE ANALYZER")
+st.subheader("Auditoria Crítica e Severa de Maturidade Digital")
 
-# --- MENU ---
-st.sidebar.title("💎 SYSTEM V8")
-modulo = st.sidebar.radio("MÓDULOS:", [
-    "01. Welcome", "02. Engenharia V8", "03. Business", "04. Conteúdo",
-    "05. Visual", "06. Avatares", "07. Automação", "08. Monetização", "🎓 Graduation"
-])
+with st.sidebar:
+    st.header("📌 Cadastro de Perfil")
+    name = st.text_input("Nome do Perfil")
+    platform_options = ["Instagram", "LinkedIn", "TikTok", "YouTube", "Twitter", "Facebook", "OUTROS"]
+    platform_sel = st.selectbox("Plataforma Principal", platform_options)
+    
+    # Campo "OUTROS" obrigatório conforme protocolo
+    platform = st.text_input("Especifique a rede (Obrigatório para 'OUTROS')") if platform_sel == "OUTROS" else platform_sel
+    
+    followers = st.number_input("Volume de Seguidores", min_value=0)
+    niche = st.text_input("Nicho de Atuação")
+    freq = st.selectbox("Frequência de Postagem", ["Nula", "Inconsistente", "3x/Semana", "Diária"])
+    objective = st.text_area("Objetivo Estratégico")
 
-# --- DATABASE DE VÍDEOS (LINKS DE ALTA COMPATIBILIDADE) ---
-# Usei vídeos de canais oficiais de tecnologia que permitem embed sem bloqueio
-v_urls = {
-    "01": "https://www.youtube.com/watch?v=5V9X-CByhYw",
-    "02": "https://www.youtube.com/watch?v=m7H09-l-H4U",
-    "03": "https://www.youtube.com/watch?v=jC4v5AS46Sg",
-    "04": "https://www.youtube.com/watch?v=A_G3lO_AFeM",
-    "05": "https://www.youtube.com/watch?v=f-N9m1w0w_M",
-    "06": "https://www.youtube.com/watch?v=y7X6A8E19jM",
-    "07": "https://www.youtube.com/watch?v=K3SAnF_uT_k",
-    "08": "https://www.youtube.com/watch?v=S_O58NfLshI"
-}
+st.markdown("### ⚡ Teste Estruturado de Competência (0 a 10)")
+c1, c2, c3, c4 = st.columns(4)
+with c1:
+    s_comm = st.slider("Comunicação", 0, 10, 5)
+    s_auth = st.slider("Autoridade", 0, 10, 5)
+with c2:
+    s_clarity = st.slider("Clareza", 0, 10, 5)
+    s_pos = st.slider("Posicionamento", 0, 10, 5)
+with c3:
+    s_strat = st.slider("Estratégia", 0, 10, 5)
+    s_tech = st.slider("Técnica", 0, 10, 5)
+with c4:
+    s_eng = st.slider("Engajamento", 0, 10, 5)
+    s_consist = st.slider("Consistência", 0, 10, 5)
 
-if modulo == "01. Welcome":
-    play_v8(v_urls["01"], "🛡️ BEM-VINDA AO COMANDO V8", "Início da sua jornada de autoridade tecnológica.")
-elif modulo == "02. Engenharia V8":
-    play_v8(v_urls["02"], "🧠 PROTOCOLO DE COMANDO", "Domine a engenharia de prompt avançada.")
-elif modulo == "03. Business":
-    play_v8(v_urls["03"], "💼 IA BUSINESS ARCHITECTURE", "Eficiência máxima no mercado jurídico.")
-elif modulo == "04. Conteúdo":
-    play_v8(v_urls["04"], "🎬 FÁBRICA DE AUTORIDADE", "Produção escalar de conteúdo estratégico.")
-elif modulo == "05. Visual":
-    play_v8(v_urls["05"], "🎨 VISUAL POWER BRANDING", "Identidade visual de elite com IA.")
-elif modulo == "06. Avatares":
-    play_v8(v_urls["06"], "🎥 CLONAGEM E ESCALA", "Sua imagem multiplicada digitalmente.")
-elif modulo == "07. Automação":
-    play_v8(v_urls["07"], "⚙️ ECOSSISTEMA AUTÔNOMO", "Processos que rodam sozinhos.")
-elif modulo == "08. Monetização":
-    play_v8(v_urls["08"], "💰 MONETIZAÇÃO ELITE", "Como cobrar caro pelo seu conhecimento.")
-elif modulo == "🎓 Graduation":
-    st.balloons()
-    st.markdown("<h1>🎓 CERTIFICAÇÃO V8 MASTER</h1>", unsafe_allow_html=True)
-    nome = st.text_input("NOME:")
-    if st.button("GERAR DIPLOMA"):
-        st.success(f"DIPLOMA EMITIDO: {nome.upper()}")
+# --- MOTOR DE ANÁLISE CRÍTICA ---
+if st.button("EXECUTAR PROTOCOLO DE AUDITORIA V8"):
+    scores = [s_comm, s_auth, s_clarity, s_pos, s_strat, s_tech, s_eng, s_consist]
+    avg = sum(scores) / len(scores)
+    
+    # Identificação de Lacunas (Notas abaixo de 6)
+    lacunas = []
+    labels = ["Comunicação", "Autoridade", "Clareza", "Posicionamento", "Estratégia", "Técnica", "Engajamento", "Consistência"]
+    for i, s in enumerate(scores):
+        if s < 6: lacunas.append(labels[i])
+
+    # Classificação Severa
+    if avg < 4: status = "FRACO"
+    elif avg < 6: status = "INCONSISTENTE"
+    elif avg < 8: status = "PROMISSOR"
+    elif avg < 9.5: status = "ESTRATÉGICO"
+    else: status = "AUTORIDADE CONSOLIDADA"
+
+    st.markdown("---")
+    st.markdown(f"<div class='report-card'><h2>CLASSIFICAÇÃO: {status}</h2>", unsafe_allow_html=True)
+    st.metric("Score de Maturidade Digital", f"{avg:.2f}")
+
+    st.markdown("### 🛑 Diagnóstico Técnico e Severo")
+    if lacunas:
+        st.error(f"FALHA ESTRUTURAL: Lacunas críticas detectadas em: {', '.join(lacunas).upper()}.")
+    
+    # Mensagens de impacto baseadas na média
+    if avg < 6:
+        st.warning("Diagnóstico: Perfil operando em regime de amadorismo. Risco alto de estagnação e perda de autoridade no mercado jurídico.")
+    else:
+        st.success("Diagnóstico: Estrutura funcional, mas requer refinamento técnico para atingir o nível God Mode.")
+
+    st.markdown("### 🛠️ Plano de Melhoria Automático")
+    for item in lacunas:
+        st.info(f"Ação Corretiva [{item}]: Aplicar protocolo de reforço técnico imediatamente para mitigar a inconsistência.")
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+
+    # Gravação no Banco de Dados
+    session = Session()
+    new_profile = ProfileV8(
+        name=name, platform=platform, followers=followers, 
+        niche=niche, diagnosis=status, score_final=avg
+    )
+    session.add(new_profile)
+    session.commit()
+    session.close()
+    st.toast("Dados arquivados no banco de dados SQLite.")
